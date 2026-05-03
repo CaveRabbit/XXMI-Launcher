@@ -254,9 +254,9 @@ class AppConfigSecurity:
 
         wrong_signatures = {}
 
-        if Config.Active.Migoto.unsafe_mode:
-            if not self.security.verify(Config.Active.Migoto.unsafe_mode_signature, os.getlogin().encode()):
-                wrong_signatures['Unsafe Mode'] = 'Enabled'
+        # if Config.Active.Migoto.unsafe_mode:
+        #     if not self.security.verify(Config.Active.Migoto.unsafe_mode_signature, os.getlogin().encode()):
+        #         wrong_signatures['Unsafe Mode'] = 'Enabled'
 
         if Config.Active.Importer.run_pre_launch:
             if not self.security.verify(Config.Active.Importer.run_pre_launch_signature, Config.Active.Importer.run_pre_launch.encode()):

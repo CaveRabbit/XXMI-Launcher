@@ -262,7 +262,7 @@ class DllInjector:
                             if result != 0:
                                 inject_error = DllInjector.InjectError.from_code(result)
                                 error_text = inject_error.format(pid=process.pid, dll_path=dll_path, error_code=result)
-                                if dll_path.name == 'd3d11.dll' and len(dll_paths) == 1:
+                                if dll_path.name == 'RabbitWrapper.dll' and len(dll_paths) == 1:
                                     raise ValueError(L('error_dll_injector_failed', """
                                         Failed to inject {dll_path}:
                                         {error_text}!
