@@ -2,7 +2,7 @@ name: Build XXMI Launcher
 
 on:
   push:
-    branches: [ main ]
+    branches: [ CaveRabbit-Experiments ]
   pull_request:
 
 jobs:
