@@ -18,11 +18,19 @@ jobs:
       with:
         python-version: '3.13'
 
-    - name: Install Nuitka + dependencies
+    - name: Cache pip dependencies
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.LOCALAPPDATA }}\pip\Cache
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Requirements
       run: pip install -r requirements.txt
 
     - name: Build XXMI Launcher with Nuitka
-      run: nuitka src/xxmi_launcher/app.py --standalone --enable-plugin=tk-inter --windows-company-name="XXMI" --windows-product-name="XXMI Launcher" --windows-file-version="9.9.9" --windows-product-version="9.9.9" --windows-uac-admin --windows-console-mode=disable
+      run: nuitka src/xxmi_launcher/app.py --standalone --enable-plugin=tk-inter --windows-uac-admin --windows-console-mode=disable
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v4
