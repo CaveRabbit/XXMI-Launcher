@@ -273,33 +273,6 @@ class WWMIPackage(ModelImporterPackage):
                 settings_manager.set_setting('RayTracedReflection', '0')
                 settings_manager.set_setting('RayTracedGI', '0')
 
-                # Take care of Wounded Effect that 'breaks' modded textures if not handled properly
-                if not Config.Importers.WWMI.Importer.disable_wounded_fx_warned:
-                    if settings_manager.get_setting('SkinDamageMode') == '1':
-                        user_dialogue = Events.Application.ShowWarning(
-                            modal=True,
-                            title=L('message_title_wounded_effect_detected', 'Wounded Effect Detected'),
-                            confirm_text=L('message_button_disable', 'Disable'),
-                            cancel_text=L('message_button_keep_enabled', 'Keep Enabled'),
-                            message=L('message_text_wounded_effect_detected', """
-                                Looks like Wounded Effect is enabled in game settings.
-                                It is not supported by most mods and textures will break after few hits taken.
-                                
-                                Click `Disable` to turn it Off and ensure proper rendering of modded textures.
-                                Click `Keep Enabled` if you never get hit or use Injured Effect Remover tool.
-                            """),
-                        )
-                        Config.Importers.WWMI.Importer.disable_wounded_fx_warned = True
-                        user_requested_injured_fx_disable = Events.Call(user_dialogue)
-                        if user_requested_injured_fx_disable:
-                            Config.Importers.WWMI.Importer.disable_wounded_fx = True
-
-                if Config.Importers.WWMI.Importer.disable_wounded_fx:
-                    settings_manager.set_setting('SkinDamageMode', '0')
-                else:
-                    settings_manager.set_setting('SkinDamageMode', '1')
-
-
         except Exception as e:
 
             if Config.Importers.WWMI.Importer.unlock_fps:
