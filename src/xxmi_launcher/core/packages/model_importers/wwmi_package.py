@@ -228,10 +228,10 @@ class WWMIPackage(ModelImporterPackage):
         game_exe_path = self.validate_game_exe_path(game_path)
         if Config.Importers.WWMI.Importer.use_launch_options:
             # Start WW directly to support launch options customization
-            return game_exe_path, ['-dx11', '-ENGINEINI=Kuro_Please_Add_Force_LOD0_For_Characters_To_Settings_Engine.ini'], str(game_exe_path.parent)
+            return game_exe_path, ['-dx11', '-ENGINEINI=Engine.ini'], str(game_exe_path.parent)
         else:
             # Start WW via wrapper exe (solves crashes for NVidia Optimus and some Steam version users)
-            return game_path / 'Wuthering Waves.exe', ['-dx11', '-ENGINEINI=Kuro_Please_Add_Force_LOD0_For_Characters_To_Settings_Engine.ini'], str(game_path)
+            return game_path / 'Wuthering Waves.exe', ['-dx11', '-ENGINEINI=Engine.ini'], str(game_path)
 
     def initialize_game_launch(self, game_path: Path):
         # Configure LocalStorage.db
@@ -320,7 +320,7 @@ class WWMIPackage(ModelImporterPackage):
                 """).format(error_text=e)) from e
 
     def update_engine_ini(self, game_path: Path):
-        engine_ini_path = game_path / 'Client' / 'Binaries' / 'Win64' / 'Kuro_Please_Add_Force_LOD0_For_Characters_To_Settings_Engine.ini'
+        engine_ini_path = game_path / 'Client' / 'Binaries' / 'Win64' / 'Engine.ini'
 
         Events.Fire(Events.Application.StatusUpdate(
             status=L('status_updating_file', 'Updating {file_name}...').format(file_name=engine_ini_path.name))
@@ -348,22 +348,6 @@ class WWMIPackage(ModelImporterPackage):
         console_variables_options = {
             # Controls how far game starts to replace weighted meshes with LoDs
             'r.Kuro.SkeletalMesh.LODDistanceScaleDeviceOffset': Config.Importers.WWMI.Importer.mesh_lod_distance_offset,
-            # Controls how aggressively higher resolution textures are pushed to VRAM
-            # Mods contain texture hashes only for original model and won't apply to LoDs
-            'r.Streaming.Boost': Config.Importers.WWMI.Importer.texture_streaming_boost,
-            # Controls the minimal texture boost floor value
-            'r.Streaming.MinBoost': Config.Importers.WWMI.Importer.texture_streaming_min_boost,
-            # Controls whether texture resolution limits imposed by LOD Bias are applied
-            'r.Streaming.UseAllMips': int(Config.Importers.WWMI.Importer.texture_streaming_use_all_mips),
-            # Controls amount of VRAM used for textures streaming
-            # When set to 0, tends to keep full resolution textures in VRAM, so LoDs don't break mods
-            'r.Streaming.PoolSize': Config.Importers.WWMI.Importer.texture_streaming_pool_size,
-            # Prevents pool size from exceeding VRAM
-            # Doesn't explicitly affect mods, but acts as failsafe for low and mid-range GPUs for PoolSize=0
-            'r.Streaming.LimitPoolSizeToVRAM': int(Config.Importers.WWMI.Importer.texture_streaming_limit_to_vram),
-            # Controls whether pool size can grow/shrink automatically or is locked to a fixed value
-            # When enabled, minimizes mip levels pop in/out at cost of pool size being locked after game start
-            'r.Streaming.UseFixedPoolSize': int(Config.Importers.WWMI.Importer.texture_streaming_fixed_pool_size),
         }
         log.debug(f'Using console variables: {console_variables_options}')
 
