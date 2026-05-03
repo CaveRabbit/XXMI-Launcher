@@ -2,7 +2,7 @@ name: Build XXMI Launcher
 
 on:
   push:
-    branches: [ CaveRabbit-Experiments ]
+    branches: [ main ]
   pull_request:
 
 jobs:
@@ -13,10 +13,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Set up Python 3.11
+    - name: Set up Python 3.13
       uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
+        python-version: '3.13'
 
     - name: Install Nuitka + dependencies
       run: |
@@ -26,8 +26,7 @@ jobs:
         pip install tk
 
     - name: Build XXMI Launcher with Nuitka
-      run: |
-        py -m nuitka src/xxmi_launcher/app.py --standalone --enable-plugin=tk-inter --windows-company-name="XXMI" --windows-product-name="XXMI Launcher" --windows-file-version="9.9.9" --windows-product-version="9.9.9" --windows-uac-admin --windows-console-mode=disable
+      run: python -m nuitka src/xxmi_launcher/app.py --standalone --enable-plugin=tk-inter --windows-company-name="XXMI" --windows-product-name="XXMI Launcher" --windows-file-version="9.9.9" --windows-product-version="9.9.9" --windows-uac-admin --windows-console-mode=disable --assume-yes-for-downloads
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v4
