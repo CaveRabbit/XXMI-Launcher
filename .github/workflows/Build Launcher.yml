@@ -18,12 +18,16 @@ jobs:
       with:
         python-version: '3.13'
 
+    - name: Install MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+
     - name: Install Nuitka + dependencies
       run: |
         pip install nuitka
         pip install ordered-set
         pip install zstandard
         pip install tk
+
 
     - name: Build XXMI Launcher with Nuitka
       run: nuitka src/xxmi_launcher/app.py --standalone --enable-plugin=tk-inter --windows-company-name="XXMI" --windows-product-name="XXMI Launcher" --windows-file-version="9.9.9" --windows-product-version="9.9.9" --windows-uac-admin --windows-console-mode=disable --assume-yes-for-downloads
