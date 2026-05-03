@@ -21,16 +21,11 @@ jobs:
     - name: Install MSVC
       uses: ilammy/msvc-dev-cmd@v1
 
-    - name: Install Nuitka + dependencies
-      run: |
-        pip install nuitka
-        pip install -r requirements.txt
-
-    - name: Install ccache
-      run: choco install ccache -y
+    - name: Requirements
+      run: pip install -r requirements.txt
 
     - name: Build XXMI Launcher with Nuitka
-      run: nuitka src/xxmi_launcher/app.py --output-filename="XXMI Launcher.exe" --standalone --enable-ccache --clang --lto=no --jobs=auto --enable-plugin=tk-inter --include-data-dir=Resources=Resources --windows-product-name="XXMI Launcher" --windows-uac-admin --windows-console-mode=disable --assume-yes-for-downloads
+      run: nuitka src/xxmi_launcher/app.py --output-filename="XXMI Launcher.exe" --standalone --clang --lto=no --jobs=auto --enable-plugin=tk-inter --include-data-dir=Resources=Resources --windows-product-name="XXMI Launcher" --windows-uac-admin --windows-console-mode=disable --assume-yes-for-downloads
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v4
