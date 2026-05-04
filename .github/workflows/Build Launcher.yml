@@ -13,10 +13,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Set up Python 3.12
+    - name: Set up Python 3.13
       uses: actions/setup-python@v5
       with:
-        python-version: '3.12'
+        python-version: '3.13'
 
     - name: Cache pip requirements
       id: cache-pip
@@ -51,7 +51,7 @@ jobs:
 
     - name: Build XXMI Launcher with Nuitka
       run: |
-        nuitka src/xxmi_launcher/app.py --standalone --enable-plugin=tk-inter --enable-ccache --clang --jobs=auto --lto=no --windows-company-name="XXMI" --windows-product-name="XXMI Launcher - Rabbit Custom" --windows-file-version="2.1.9" --windows-product-version="2.1.9" --windows-uac-admin --windows-console-mode=disable --assume-yes-for-downloads --output-filename="XXMI Launcher.exe"
+        nuitka src/xxmi_launcher/app.py --standalone --enable-plugin=tk-inter --clang --jobs=auto --lto=no --windows-company-name="XXMI" --windows-product-name="XXMI Launcher - Rabbit Custom" --windows-file-version="2.1.9" --windows-product-version="2.1.9" --windows-uac-admin --windows-console-mode=disable --assume-yes-for-downloads --output-filename="XXMI Launcher.exe"
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v4
