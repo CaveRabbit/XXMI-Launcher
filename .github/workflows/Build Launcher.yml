@@ -18,7 +18,7 @@ jobs:
       with:
         python-version: '3.13'
 
-    - name: Cache pip dependencies
+    - name: Cache pip requirements
       id: cache-pip
       uses: actions/cache@v4
       with:
@@ -27,7 +27,22 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
 
-    - name: Install Nuitka + dependencies
+    - name: Cache Nuitka build cache
+      uses: actions/cache@v4
+      with:
+        path: C:\Users\runneradmin\AppData\Local\Nuitka\Cache
+        key: ${{ runner.os }}-nuitka-cache
+
+    - name: Cache ccache installation
+      uses: actions/cache@v4
+      id: cache-ccache-install
+      with:
+        path: |
+          C:\ProgramData\chocolatey\lib\ccache
+          C:\ProgramData\chocolatey\bin\ccache.exe
+        key: ${{ runner.os }}-ccache-install
+
+    - name: Install Requirements
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
@@ -37,6 +52,7 @@ jobs:
         pip install tk
 
     - name: Install ccache
+      if: steps.cache-ccache-install.outputs.cache-hit != 'true'
       run: choco install ccache -y
 
     # - name: Build XXMI Launcher with Nuitka
