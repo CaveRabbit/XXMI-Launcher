@@ -16,189 +16,189 @@ from gui.classes.widgets import UILabel, UIButton, UIEntry, UICheckbox,  UIOptio
 
 
 class GeneralSettingsFrame(UIScrollableFrame):
-    def __init__(self, master, fix_grid=False):
-        super().__init__(master, height=410, corner_radius=0, border_width=0, hide_scrollbar=True, fix_grid=fix_grid)
-        self._scrollbar_hidden_color = master._fg_color
+	def __init__(self, master, fix_grid=False):
+		super().__init__(master, height=410, corner_radius=0, border_width=0, hide_scrollbar=True, fix_grid=fix_grid)
+		self._scrollbar_hidden_color = master._fg_color
 
-        self.grid_columnconfigure((0, 2, 3), weight=1)
-        self.grid_columnconfigure(1, weight=100)
-        self.grid_rowconfigure((0, 1, 2, 3), weight=1)
-        self.grid_rowconfigure(6, weight=100)
+		self.grid_columnconfigure((0, 2, 3), weight=1)
+		self.grid_columnconfigure(1, weight=100)
+		self.grid_rowconfigure((0, 1, 2, 3), weight=1)
+		self.grid_rowconfigure(6, weight=100)
 
-        # Language
-        self.put(LanguageLabel(self)).grid(row=0, column=0, padx=(20, 10), pady=(0, 30), sticky='w')
-        self.put(LanguageOptionMenu(self)).grid(row=0, column=1, padx=(0, 10), pady=(0, 30), sticky='w', columnspan=3)
+		# Language
+		self.put(LanguageLabel(self)).grid(row=0, column=0, padx=(20, 10), pady=(0, 30), sticky='w')
+		self.put(LanguageOptionMenu(self)).grid(row=0, column=1, padx=(0, 10), pady=(0, 30), sticky='w', columnspan=3)
 
-        # Game Folder
-        self.put(GameFolderLabel(self)).grid(row=1, column=0, padx=(20, 10), pady=(0, 30), sticky='w')
-        self.put(GameFolderFrame(self)).grid(row=1, column=1, padx=(0, 65), pady=(0, 30), sticky='new', columnspan=3)
-        self.put(DetectGameFolderButton(self)).grid(row=1, column=1, padx=(0, 20), pady=(0, 30), sticky='e', columnspan=3)
+		# Game Folder
+		self.put(GameFolderLabel(self)).grid(row=1, column=0, padx=(20, 10), pady=(0, 30), sticky='w')
+		self.put(GameFolderFrame(self)).grid(row=1, column=1, padx=(0, 65), pady=(0, 30), sticky='new', columnspan=3)
+		self.put(DetectGameFolderButton(self)).grid(row=1, column=1, padx=(0, 20), pady=(0, 30), sticky='e', columnspan=3)
 
-        # Launch Options
-        self.put(LaunchOptionsLabel(self)).grid(row=2, column=0, padx=(20, 10), pady=(0, 30), sticky='w')
-        self.put(LaunchOptionsFrame(self)).grid(row=2, column=1, padx=(0, 20), pady=(0, 30), sticky='ew', columnspan=3)
+		# Launch Options
+		self.put(LaunchOptionsLabel(self)).grid(row=2, column=0, padx=(20, 10), pady=(0, 30), sticky='w')
+		self.put(LaunchOptionsFrame(self)).grid(row=2, column=1, padx=(0, 20), pady=(0, 30), sticky='ew', columnspan=3)
 
-        # Process Priority
-        self.put(StartMethodLabel(self)).grid(row=3, column=0, padx=(20, 10), pady=(0, 30), sticky='w')
-        self.put(ProcessOptionsFrame(self)).grid(row=3, column=1, padx=(0, 20), pady=(0, 30), sticky='w', columnspan=3)
+		# Process Priority
+		self.put(StartMethodLabel(self)).grid(row=3, column=0, padx=(20, 10), pady=(0, 30), sticky='w')
+		self.put(ProcessOptionsFrame(self)).grid(row=3, column=1, padx=(0, 20), pady=(0, 30), sticky='w', columnspan=3)
 
-        # Auto Config
-        if Vars.Launcher.active_importer.get() not in ['SRMI', 'HIMI', 'EFMI']:
-            self.put(AutoConfigLabel(self)).grid(row=4, column=0, padx=(20, 10), pady=(0, 30), sticky='w')
-            self.put(AutoConfigFrame(self)).grid(row=4, column=1, padx=(0, 20), pady=(0, 30), sticky='w', columnspan=3)
+		# Auto Config
+		if Vars.Launcher.active_importer.get() not in ['SRMI', 'HIMI', 'EFMI']:
+			self.put(AutoConfigLabel(self)).grid(row=4, column=0, padx=(20, 10), pady=(0, 30), sticky='w')
+			self.put(AutoConfigFrame(self)).grid(row=4, column=1, padx=(0, 20), pady=(0, 30), sticky='w', columnspan=3)
 
-        if Vars.Launcher.active_importer.get() not in ['ZZMI', 'EFMI']:
-            
-            # Tweaks
-            self.put(TweaksLabel(self)).grid(row=5, column=0, padx=(20, 10), pady=(0, 30), sticky='w')
-    
-            tweaks_frame = UIFrame(self, fg_color=master._fg_color)
-            tweaks_frame.grid(row=5, column=1, padx=(0, 0), pady=(0, 30), sticky='we', columnspan=3)
-            tweaks_frame.put(UnlockFPSCheckbox(tweaks_frame)).grid(row=0, column=0, padx=(0, 10), pady=(0, 0), sticky='w')
-    
-            # Window mode for GI FPS Unlocker
-            if Vars.Launcher.active_importer.get() == 'GIMI':
-                tweaks_frame.put(UnlockFPSValueEntry(tweaks_frame)).grid(row=0, column=1, padx=(0, 10), pady=(0, 0), sticky='w')
-                tweaks_frame.grab(UnlockFPSValueEntry).set_tooltip(tweaks_frame.grab(UnlockFPSCheckbox))
-                tweaks_frame.put(UnlockFPSWindowOptionMenu(tweaks_frame)).grid(row=0, column=2, padx=(20, 10), pady=(0, 0), sticky='w')
-                tweaks_frame.put(EnableHDR(tweaks_frame)).grid(row=0, column=3, padx=(60, 10), pady=(0, 0), sticky='w')
+		if Vars.Launcher.active_importer.get() not in ['ZZMI', 'EFMI']:
+			
+			# Tweaks
+			self.put(TweaksLabel(self)).grid(row=5, column=0, padx=(20, 10), pady=(0, 30), sticky='w')
+	
+			tweaks_frame = UIFrame(self, fg_color=master._fg_color)
+			tweaks_frame.grid(row=5, column=1, padx=(0, 0), pady=(0, 30), sticky='we', columnspan=3)
+			tweaks_frame.put(UnlockFPSCheckbox(tweaks_frame)).grid(row=0, column=0, padx=(0, 10), pady=(0, 0), sticky='w')
+	
+			# Window mode for GI FPS Unlocker
+			if Vars.Launcher.active_importer.get() == 'GIMI':
+				tweaks_frame.put(UnlockFPSValueEntry(tweaks_frame)).grid(row=0, column=1, padx=(0, 10), pady=(0, 0), sticky='w')
+				tweaks_frame.grab(UnlockFPSValueEntry).set_tooltip(tweaks_frame.grab(UnlockFPSCheckbox))
+				tweaks_frame.put(UnlockFPSWindowOptionMenu(tweaks_frame)).grid(row=0, column=2, padx=(20, 10), pady=(0, 0), sticky='w')
+				tweaks_frame.put(EnableHDR(tweaks_frame)).grid(row=0, column=3, padx=(60, 10), pady=(0, 0), sticky='w')
 
-            elif Vars.Launcher.active_importer.get() == 'HIMI':
-                tweaks_frame.put(UnlockFPSValueEntry(tweaks_frame)).grid(row=0, column=1, padx=(0, 10), pady=(0, 0), sticky='w')
-                tweaks_frame.grab(UnlockFPSValueEntry).set_tooltip(tweaks_frame.grab(UnlockFPSCheckbox))
+			elif Vars.Launcher.active_importer.get() == 'HIMI':
+				tweaks_frame.put(UnlockFPSValueEntry(tweaks_frame)).grid(row=0, column=1, padx=(0, 10), pady=(0, 0), sticky='w')
+				tweaks_frame.grab(UnlockFPSValueEntry).set_tooltip(tweaks_frame.grab(UnlockFPSCheckbox))
 
-            #  Performance Tweaks
-            if Vars.Launcher.active_importer.get() == 'WWMI':
-                tweaks_frame.put(ApplyTweaksCheckbox(tweaks_frame)).grid(row=0, column=1, padx=(20, 10), pady=(0, 0), sticky='w')
-                tweaks_frame.put(OpenGameConfigButton(tweaks_frame)).grid(row=0, column=2, padx=(10, 20), pady=(0, 0), sticky='e')
+			#  Performance Tweaks
+			if Vars.Launcher.active_importer.get() == 'WWMI':
+				tweaks_frame.put(ApplyTweaksCheckbox(tweaks_frame)).grid(row=0, column=1, padx=(20, 10), pady=(0, 0), sticky='w')
+				tweaks_frame.put(OpenGameConfigButton(tweaks_frame)).grid(row=0, column=2, padx=(10, 20), pady=(0, 0), sticky='e')
 
-        if Vars.Launcher.active_importer.get() == 'WWMI':
-            self.put(EngineSettingsLabel(self)).grid(row=6, column=0, padx=(20, 10), pady=(0, 20), sticky='w')
-            self.put(TextureStreamingFrame(self)).grid(row=6, column=1, padx=(0, 20), pady=(0, 20), sticky='w', columnspan=3)
+		if Vars.Launcher.active_importer.get() == 'WWMI':
+			self.put(EngineSettingsLabel(self)).grid(row=6, column=0, padx=(20, 10), pady=(0, 20), sticky='w')
+			self.put(TextureStreamingFrame(self)).grid(row=6, column=1, padx=(0, 20), pady=(0, 20), sticky='w', columnspan=3)
 
 
 class LanguageLabel(UILabel):
-    def __init__(self, master):
-        super().__init__(
-            text=L('launcher_settings_language_label', 'Language:'),
-            font=('Microsoft YaHei', 14, 'bold'),
-            fg_color='transparent',
-            master=master)
+	def __init__(self, master):
+		super().__init__(
+			text=L('launcher_settings_language_label', 'Language:'),
+			font=('Microsoft YaHei', 14, 'bold'),
+			fg_color='transparent',
+			master=master)
 
 
 class LanguageOptionMenu(UIOptionMenu):
-    def __init__(self, master):
-        super().__init__(
-            width=120,
-            height=36,
-            font=('Arial', 14),
-            dropdown_font=('Arial', 14),
-            values={l.name: l.display_name for l in Locale.get_indexed_locales()},
-            variable=Vars.Launcher.locale,
-            command=self.handle_language_change,
-            master=master)
+	def __init__(self, master):
+		super().__init__(
+			width=120,
+			height=36,
+			font=('Arial', 14),
+			dropdown_font=('Arial', 14),
+			values={l.name: l.display_name for l in Locale.get_indexed_locales()},
+			variable=Vars.Launcher.locale,
+			command=self.handle_language_change,
+			master=master)
 
-    def handle_language_change(self, value):
-        Events.Fire(Events.Application.LoadLocale(locale_name=Vars.Launcher.locale.get(), skip_reload=False))
-        Events.Fire(Events.Application.CloseSettings(save=True))
-        Events.Fire(Events.GUI.ReloadGUI())
-        Events.Fire(Events.Application.Busy())
-        Events.Fire(Events.Application.OpenSettings())
-        Events.Fire(Events.Application.Ready())
+	def handle_language_change(self, value):
+		Events.Fire(Events.Application.LoadLocale(locale_name=Vars.Launcher.locale.get(), skip_reload=False))
+		Events.Fire(Events.Application.CloseSettings(save=True))
+		Events.Fire(Events.GUI.ReloadGUI())
+		Events.Fire(Events.Application.Busy())
+		Events.Fire(Events.Application.OpenSettings())
+		Events.Fire(Events.Application.Ready())
 
 
 class GameFolderFrame(UIFrame):
-    def __init__(self, master):
-        super().__init__(
-            border_color = ThemeManager.theme["CTkEntry"].get("border_color", None),
-            border_width = ThemeManager.theme["CTkEntry"].get("border_width", None),
-            fg_color = ThemeManager.theme["CTkEntry"].get("fg_color", None),
-            master=master)
+	def __init__(self, master):
+		super().__init__(
+			border_color = ThemeManager.theme["CTkEntry"].get("border_color", None),
+			border_width = ThemeManager.theme["CTkEntry"].get("border_width", None),
+			fg_color = ThemeManager.theme["CTkEntry"].get("fg_color", None),
+			master=master)
 
-        self.grid_columnconfigure(0, weight=100)
+		self.grid_columnconfigure(0, weight=100)
 
-        game_folder_error = master.put(GameFolderErrorLabel(master))
+		game_folder_error = master.put(GameFolderErrorLabel(master))
 
-        self.put(GameFolderEntry(self, game_folder_error)).grid(row=0, column=0, padx=(4, 0), pady=(2, 0), sticky='new')
-        self.put(ChangeGameFolderButton(self)).grid(row=0, column=1, padx=(0, 4), pady=(2, 2), sticky='ne')
+		self.put(GameFolderEntry(self, game_folder_error)).grid(row=0, column=0, padx=(4, 0), pady=(2, 0), sticky='new')
+		self.put(ChangeGameFolderButton(self)).grid(row=0, column=1, padx=(0, 4), pady=(2, 2), sticky='ne')
 
 
 class LaunchOptionsFrame(UIFrame):
-    def __init__(self, master):
-        super().__init__(
-            fg_color='transparent',
-            master=master)
+	def __init__(self, master):
+		super().__init__(
+			fg_color='transparent',
+			master=master)
 
-        self.grid_columnconfigure(1, weight=100)
+		self.grid_columnconfigure(1, weight=100)
 
-        self.put(LaunchOptionsCheckbox(self)).grid(row=0, column=0, padx=(0, 0), pady=(0, 0), sticky='w')
-        self.put(LaunchOptionsEntryFrame(self)).grid(row=0, column=1, padx=(0, 0), pady=(0, 0), sticky='ew')
-        self.grab(LaunchOptionsCheckbox).set_tooltip(self.grab(LaunchOptionsEntryFrame).grab(LaunchOptionsEntry))
+		self.put(LaunchOptionsCheckbox(self)).grid(row=0, column=0, padx=(0, 0), pady=(0, 0), sticky='w')
+		self.put(LaunchOptionsEntryFrame(self)).grid(row=0, column=1, padx=(0, 0), pady=(0, 0), sticky='ew')
+		self.grab(LaunchOptionsCheckbox).set_tooltip(self.grab(LaunchOptionsEntryFrame).grab(LaunchOptionsEntry))
 
 
 class LaunchOptionsEntryFrame(UIFrame):
-    def __init__(self, master):
-        super().__init__(
-            border_color = ThemeManager.theme["CTkEntry"].get("border_color", None),
-            border_width = ThemeManager.theme["CTkEntry"].get("border_width", None),
-            fg_color = ThemeManager.theme["CTkEntry"].get("fg_color", None),
-            master=master)
+	def __init__(self, master):
+		super().__init__(
+			border_color = ThemeManager.theme["CTkEntry"].get("border_color", None),
+			border_width = ThemeManager.theme["CTkEntry"].get("border_width", None),
+			fg_color = ThemeManager.theme["CTkEntry"].get("fg_color", None),
+			master=master)
 
-        self.grid_columnconfigure(0, weight=100)
+		self.grid_columnconfigure(0, weight=100)
 
-        self.put(LaunchOptionsEntry(self)).grid(row=0, column=0, padx=(4, 0), pady=(2, 2), sticky='ew')
-        self.put(LaunchOptionsButton(self)).grid(row=0, column=1, padx=(0, 4), pady=(2, 2), sticky='e')
+		self.put(LaunchOptionsEntry(self)).grid(row=0, column=0, padx=(4, 0), pady=(2, 2), sticky='ew')
+		self.put(LaunchOptionsButton(self)).grid(row=0, column=1, padx=(0, 4), pady=(2, 2), sticky='e')
 
-        self.trace_write(Vars.Active.Importer.use_launch_options, self.handle_write_use_launch_options)
+		self.trace_write(Vars.Active.Importer.use_launch_options, self.handle_write_use_launch_options)
 
-    def handle_write_use_launch_options(self, var, val):
-        if val:
-            self.configure(
-                fg_color = ThemeManager.theme['CTkEntry'].get('fg_color', None),
-                border_color = ThemeManager.theme["CTkEntry"].get("border_color", None))
-        else:
-            self.configure(
-                fg_color = ThemeManager.theme['CTkEntry'].get('fg_color_disabled', None),
-                border_color = ThemeManager.theme["CTkEntry"].get("border_color_disabled", None))
+	def handle_write_use_launch_options(self, var, val):
+		if val:
+			self.configure(
+				fg_color = ThemeManager.theme['CTkEntry'].get('fg_color', None),
+				border_color = ThemeManager.theme["CTkEntry"].get("border_color", None))
+		else:
+			self.configure(
+				fg_color = ThemeManager.theme['CTkEntry'].get('fg_color_disabled', None),
+				border_color = ThemeManager.theme["CTkEntry"].get("border_color_disabled", None))
 
 
 class ProcessOptionsFrame(UIFrame):
-    def __init__(self, master):
-        super().__init__(
-            fg_color = 'transparent',
-            master=master)
+	def __init__(self, master):
+		super().__init__(
+			fg_color = 'transparent',
+			master=master)
 
-        self.grid_columnconfigure(0, weight=100)
+		self.grid_columnconfigure(0, weight=100)
 
-        self.put(StartMethodOptionMenu(self)).grid(row=0, column=0, padx=(0, 10), pady=(0, 0), sticky='w')
+		self.put(StartMethodOptionMenu(self)).grid(row=0, column=0, padx=(0, 10), pady=(0, 0), sticky='w')
 
-        self.put(ProcessPriorityLabel(self)).grid(row=0, column=1, padx=20, pady=(0, 0), sticky='w')
-        self.put(ProcessPriorityOptionMenu(self)).grid(row=0, column=2, padx=(0, 10), pady=(0, 0), sticky='w')
+		self.put(ProcessPriorityLabel(self)).grid(row=0, column=1, padx=20, pady=(0, 0), sticky='w')
+		self.put(ProcessPriorityOptionMenu(self)).grid(row=0, column=2, padx=(0, 10), pady=(0, 0), sticky='w')
 
-        self.put(TimeoutLabel(self)).grid(row=0, column=3, padx=20, pady=0, sticky='e')
-        self.put(TimeoutEntry(self)).grid(row=0, column=4, padx=(0, 0), pady=0, sticky='e')
-        self.grab(TimeoutLabel).set_tooltip(self.grab(TimeoutEntry))
+		self.put(TimeoutLabel(self)).grid(row=0, column=3, padx=20, pady=0, sticky='e')
+		self.put(TimeoutEntry(self)).grid(row=0, column=4, padx=(0, 0), pady=0, sticky='e')
+		self.grab(TimeoutLabel).set_tooltip(self.grab(TimeoutEntry))
 
 
 class AutoConfigFrame(UIFrame):
-    def __init__(self, master):
-        super().__init__(
-            fg_color = 'transparent',
-            master=master)
+	def __init__(self, master):
+		super().__init__(
+			fg_color = 'transparent',
+			master=master)
 
-        self.grid_columnconfigure(0, weight=100)
+		self.grid_columnconfigure(0, weight=100)
 
-        self.put(ConfigureGameCheckbox(self)).grid(row=0, column=0, padx=(0, 10), pady=(0, 0), sticky='w')
-        
-        if Vars.Launcher.active_importer.get() == 'WWMI':
-            self.put(ForceUltraHighLodBias(self)).grid(row=0, column=1, padx=(10, 20), pady=(0, 0), sticky='w')
-            self.put(DisableWoundedEffectCheckbox(self)).grid(row=0, column=2, padx=(10, 20), pady=(0, 0), sticky='w')
+		self.put(ConfigureGameCheckbox(self)).grid(row=0, column=0, padx=(0, 10), pady=(0, 0), sticky='w')
+		
+		if Vars.Launcher.active_importer.get() == 'WWMI':
+			self.put(ForceUltraHighLodBias(self)).grid(row=0, column=1, padx=(10, 20), pady=(0, 0), sticky='w')
+			self.put(DisableWoundedEffectCheckbox(self)).grid(row=0, column=2, padx=(10, 20), pady=(0, 0), sticky='w')
 
 
 class EngineSettingsLabel(UILabel):
-    def __init__(self, master):
-        super().__init__(
-            text=L('general_settings_engine_settings_label', 'Engine Settings:'),
+	def __init__(self, master):
+		super().__init__(
+		    text=L('general_settings_engine_settings_label', 'Engine Settings:'),
             font=('Microsoft YaHei', 14, 'bold'),
             fg_color='transparent',
             master=master)

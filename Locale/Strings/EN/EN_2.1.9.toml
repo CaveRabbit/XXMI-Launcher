@@ -19,15 +19,15 @@ src = """
 Serves as a multiplier to streaming priorities configured for textures.
 
 * If modded textures are not loading, try increasing it to **25** or **30**.
-    - ⚡ Too high values may increase VRAM usage and can cause stuttering if the pool is small.
+	- ⚡ Too high values may increase VRAM usage and can cause stuttering if the pool is small.
 
 This value may require fine tuning to minimize modded textures loading delay:
 
 * Start tuning with **20.0** **(default)**.
-    - ✅ This baseline value should work for most PCs.
+	- ✅ This baseline value should work for most PCs.
 
 * If modded textures are loading fine, gradually decrease until small textures (like eyes) start breaking.
-    - ✅ A value just above this “breaking point” typically gives minimal texture loading delay while staying VRAM-friendly.
+	- ✅ A value just above this “breaking point” typically gives minimal texture loading delay while staying VRAM-friendly.
 """
 loc = """
 ## Controls how aggressively higher-resolution textures are pushed to VRAM:
@@ -35,15 +35,15 @@ loc = """
 Serves as a multiplier to streaming priorities configured for textures.
 
 * If modded textures are not loading, try increasing it to **25** or **30**.
-    - ⚡ Too high values may increase VRAM usage and can cause stuttering if the pool is small.
+	- ⚡ Too high values may increase VRAM usage and can cause stuttering if the pool is small.
 
 This value may require fine tuning to minimize modded textures loading delay:
 
 * Start tuning with **20.0** **(default)**.
-    - ✅ This baseline value should work for most PCs.
+	- ✅ This baseline value should work for most PCs.
 
 * If modded textures are loading fine, gradually decrease until small textures (like eyes) start breaking.
-    - ✅ A value just above this “breaking point” typically gives minimal texture loading delay while staying VRAM-friendly.
+	- ✅ A value just above this “breaking point” typically gives minimal texture loading delay while staying VRAM-friendly.
 """
 
 [general_settings_texture_min_boost_entry_tooltip]
@@ -69,21 +69,21 @@ src = """
 ## Controls whether texture resolution limits are applied:
 
 * **Enabled** **(default)**: Disable resolution restrictions from LOD Bias.
-    - ✅ Allows to load full resolution textures at cost of higher VRAM usage.
-    - ⚡ If it has no effect or consumes too much VRAM, try to enable **Max LOD Bias** instead.
+	- ✅ Allows to load full resolution textures at cost of higher VRAM usage.
+	- ⚡ If it has no effect or consumes too much VRAM, try to enable **Max LOD Bias** instead.
 
 * **Disabled**: Enable resolution restrictions from LOD Bias.
-    - ⚡ Modded textures won't load if disabled without Max (Ultra High) LOD Bias enabled.
+	- ⚡ Modded textures won't load if disabled without Max (Ultra High) LOD Bias enabled.
 """
 loc = """
 ## Controls whether texture resolution limits are applied:
 
 * **Enabled** **(default)**: Disable resolution restrictions from LOD Bias.
-    - ✅ Allows to load full resolution textures at cost of higher VRAM usage.
-    - ⚡ If it has no effect or consumes too much VRAM, try to enable **Max LOD Bias** instead.
+	- ✅ Allows to load full resolution textures at cost of higher VRAM usage.
+	- ⚡ If it has no effect or consumes too much VRAM, try to enable **Max LOD Bias** instead.
 
 * **Disabled**: Enable resolution restrictions from LOD Bias.
-    - ⚡ Modded textures won't load if disabled without Max (Ultra High) LOD Bias enabled.
+	- ⚡ Modded textures won't load if disabled without Max (Ultra High) LOD Bias enabled.
 """
 
 [general_settings_texture_streaming_pool_size_entry_tooltip]
@@ -105,23 +105,23 @@ src = """
 ## Sets the upper limit for how much VRAM the game can use for textures:
 
 * **Enabled** **(default)** – Limits texture pool size based on your GPU's available VRAM.
-    - ✅ Helps prevent crashes or stuttering on low VRAM systems.
-    - ⚡ May reduce texture quality or cause pop-ins if too restrictive on high-end GPUs.
+	- ✅ Helps prevent crashes or stuttering on low VRAM systems.
+	- ⚡ May reduce texture quality or cause pop-ins if too restrictive on high-end GPUs.
 
 * **Disabled** – Unlocks maximum texture pool size, even if it exceeds your GPU's safe limits.
-    - ✅ Can improve texture quality and reduce pop-ins on powerful systems.
-    - ⚡ Risk of performance drops, stutters, or crashes if VRAM runs out.
+	- ✅ Can improve texture quality and reduce pop-ins on powerful systems.
+	- ⚡ Risk of performance drops, stutters, or crashes if VRAM runs out.
 """
 loc = """
 ## Sets the upper limit for how much VRAM the game can use for textures:
 
 * **Enabled** **(default)** – Limits texture pool size based on your GPU's available VRAM.
-    - ✅ Helps prevent crashes or stuttering on low VRAM systems.
-    - ⚡ May reduce texture quality or cause pop-ins if too restrictive on high-end GPUs.
+	- ✅ Helps prevent crashes or stuttering on low VRAM systems.
+	- ⚡ May reduce texture quality or cause pop-ins if too restrictive on high-end GPUs.
 
 * **Disabled** – Unlocks maximum texture pool size, even if it exceeds your GPU's safe limits.
-    - ✅ Can improve texture quality and reduce pop-ins on powerful systems.
-    - ⚡ Risk of performance drops, stutters, or crashes if VRAM runs out.
+	- ✅ Can improve texture quality and reduce pop-ins on powerful systems.
+	- ⚡ Risk of performance drops, stutters, or crashes if VRAM runs out.
 """
 
 [general_settings_texture_streaming_fixed_pool_size_checkbox_tooltip]
@@ -129,21 +129,21 @@ src = """
 ## Controls automatic pool size grow/shrink capabilities:
 
 * **Enabled** **(default)** – Locks texture pool size to value calculated on game start.
-    - ✅ Eliminates modded textures loading delay by minimizing texture mip levels pop in/out.
-    - ⚡ Pool size is locked on game start, low end GPU users may want to close as much apps as possible.
+	- ✅ Eliminates modded textures loading delay by minimizing texture mip levels pop in/out.
+	- ⚡ Pool size is locked on game start, low end GPU users may want to close as much apps as possible.
 
 * **Disabled** – Allows game engine to dynamically resize pool.
-    - ✅ Provides more freedom to both engine (allows mips streaming) and user (no need to close apps).
-    - ⚡ Introduces short delay to modded textures loading unless **Texture Boost** values is perfectly tuned.
+	- ✅ Provides more freedom to both engine (allows mips streaming) and user (no need to close apps).
+	- ⚡ Introduces short delay to modded textures loading unless **Texture Boost** values is perfectly tuned.
 """
 loc = """
 ## Controls automatic pool size grow/shrink capabilities:
 
 * **Enabled** **(default)** – Locks texture pool size to value calculated on game start.
-    - ✅ Eliminates modded textures loading delay by minimizing texture mip levels pop in/out.
-    - ⚡ Pool size is locked on game start, low end GPU users may want to close as much apps as possible.
+	- ✅ Eliminates modded textures loading delay by minimizing texture mip levels pop in/out.
+	- ⚡ Pool size is locked on game start, low end GPU users may want to close as much apps as possible.
 
 * **Disabled** – Allows game engine to dynamically resize pool.
-    - ✅ Provides more freedom to both engine (allows mips streaming) and user (no need to close apps).
-    - ⚡ Introduces short delay to modded textures loading unless **Texture Boost** values is perfectly tuned.
+	- ✅ Provides more freedom to both engine (allows mips streaming) and user (no need to close apps).
+	- ⚡ Introduces short delay to modded textures loading unless **Texture Boost** values is perfectly tuned.
 """
