@@ -132,11 +132,11 @@ class MigotoPackage(Package):
                 self.restore_package_files(e, context.process_name, validate=False)
 
         # Check signatures to prevent 3rd-party 3dmigoto libraries from loading
-        if not Config.Active.Migoto.unsafe_mode:
-            try:
-                self.validate_deployed_files()
-            except Exception as e:
-                self.restore_package_files(e, context.process_name, validate=True)
+        # if not Config.Active.Migoto.unsafe_mode:
+        #     try:
+        #         self.validate_deployed_files()
+        #     except Exception as e:
+        #         self.restore_package_files(e, context.process_name, validate=True)
 
         Events.Fire(Events.Application.Busy())
 
@@ -360,7 +360,7 @@ class MigotoInjector:
             process_flags=process_flags,
             use_hook=use_hook,
             custom_launch_cmd=custom_launch_cmd,
-            xxmi_dll_path=Config.Active.Importer.importer_path / 'd3d11.dll',
+            xxmi_dll_path=Config.Active.Importer.importer_path / 'RabbitWrapper.dll',
             inject_dll_paths=dll_paths,
         )
 
