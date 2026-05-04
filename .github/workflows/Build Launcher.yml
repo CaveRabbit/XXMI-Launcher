@@ -27,12 +27,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
 
-    - name: Cache Nuitka build cache
-      uses: actions/cache@v4
-      with:
-        path: C:\Users\runneradmin\AppData\Local\Nuitka\Cache
-        key: ${{ runner.os }}-nuitka-cache
-
     - name: Cache ccache installation
       uses: actions/cache@v4
       id: cache-ccache-install
@@ -55,9 +49,9 @@ jobs:
       if: steps.cache-ccache-install.outputs.cache-hit != 'true'
       run: choco install ccache -y
 
-    # - name: Build XXMI Launcher with Nuitka
-    #   run: |
-    #     nuitka src/xxmi_launcher/app.py --standalone --enable-plugin=tk-inter  --windows-company-name="XXMI" --windows-product-name="XXMI Launcher - Rabbit Custom" --windows-file-version="2.1.9" --windows-product-version="2.1.9" --windows-uac-admin --windows-console-mode=disable --assume-yes-for-downloads --output-filename="XXMI Launcher.exe"
+    - name: Build XXMI Launcher with Nuitka
+      run: |
+        nuitka src/xxmi_launcher/app.py --standalone --enable-plugin=tk-inter --enable-ccache --clang --jobs=auto --lto=no --windows-company-name="XXMI" --windows-product-name="XXMI Launcher - Rabbit Custom" --windows-file-version="2.1.9" --windows-product-version="2.1.9" --windows-uac-admin --windows-console-mode=disable --assume-yes-for-downloads --output-filename="XXMI Launcher.exe"
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v4
