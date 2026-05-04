@@ -35,7 +35,7 @@ jobs:
 
     - name: Build XXMI Launcher with Nuitka
       run: |
-        py -m nuitka src/xxmi_launcher/app.py --standalone --enable-plugin=tk-inter --windows-company-name="XXMI" --windows-product-name="XXMI Launcher" --windows-file-version="9.9.9" --windows-product-version="9.9.9" --windows-uac-admin --windows-console-mode=disable
+        nuitka src/xxmi_launcher/app.py --standalone --enable-plugin=tk-inter --windows-company-name="XXMI" --windows-product-name="XXMI Launcher" --windows-file-version="9.9.9" --windows-product-version="9.9.9" --windows-uac-admin --windows-console-mode=disable
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v4
