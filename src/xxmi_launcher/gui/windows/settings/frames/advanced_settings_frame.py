@@ -299,10 +299,8 @@ class InjectLibrariesTextbox(UITextbox):
 			undo=True,
 			master=master)
 		self.set_tooltip(L('advanced_settings_inject_libraries_tooltip', """
-			List of additional DLL paths to inject into the game process. 1 path per line.
-			injection will be made via WriteProcessMemory method.
-			Example (inject ReShade dll):
-			`C:\Games\ReShade\ReShade64.dll`
+			Ordered list of custom DLLs to inject.
+			Place the DLLs next to RabbitWrapper.dll.
 		"""))
 
 		self.trace_write(Vars.Active.Importer.extra_libraries_enabled, self.handle_write_extra_libraries_enabled)
