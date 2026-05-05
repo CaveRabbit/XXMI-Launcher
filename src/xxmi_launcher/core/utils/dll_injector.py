@@ -278,7 +278,6 @@ class DllInjector:
 									# 	""").format(dll_path=dll_path, error_text=error_text))
 								else:
 									log.debug(f'Successfully injected DLL to process {process.name()} (PID: {process.pid}): {dll_path}')
-									break
 						return process.pid
 				except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
 					pass

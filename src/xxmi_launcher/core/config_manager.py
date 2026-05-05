@@ -143,13 +143,16 @@ class AppConfig:
 			Importers = self.Importers
 
 	def save(self):
-		# --- 1. Extract DLL list from active importer ---
+		# --- 1. Save the rest of the launcher config normally ---
+		Paths.App.write_file(self.config_path, Config.as_json())
+
+		# --- 2. Extract DLL list from active importer ---
 		extra_libs = Config.Active.Importer.extra_libraries
 
-		# --- 2. Determine correct ChainloadOrder.ini path ---
+		# --- 3. Determine correct ChainloadOrder.ini path ---
 		wrapper_ini = Config.Active.Importer.importer_path / "ChainloadOrder.ini"
 
-		# --- 3. Write DLL list to wrapper config with header ---
+		# --- 4. Write DLL list to wrapper config with header ---
 		try:
 			with open(wrapper_ini, "w", encoding="utf-8") as f:
 				f.write("[Chainload]\n")
@@ -162,14 +165,11 @@ class AppConfig:
 		except Exception as e:
 			log.error(f"Failed to write wrapper config: {wrapper_ini}: {e}")
 
-		# --- 4. Remove extra_libraries from JSON before saving ---
-		Config.Active.Importer.extra_libraries = ""
+		# --- R. Remove extra_libraries from JSON before saving ---
+		# Config.Active.Importer.extra_libraries = ""
 
-		# --- 5. Save the rest of the launcher config normally ---
-		Paths.App.write_file(self.config_path, Config.as_json())
-
-		# --- 6. Restore in-memory value so UI still shows it ---
-		Config.Active.Importer.extra_libraries = extra_libs
+		# --- R. Restore in-memory value so UI still shows it ---
+		# Config.Active.Importer.extra_libraries = extra_libs
 
 
 	def run_patch_195(self):
