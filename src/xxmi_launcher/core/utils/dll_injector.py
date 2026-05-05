@@ -256,25 +256,29 @@ class DllInjector:
 			for process in psutil.process_iter():
 				try:
 					if process.name() == process_name or process.pid == pid:
-						for dll_path in dll_paths:
-							wide_dll_path = wt.LPCWSTR(str(dll_path.resolve()))
-							result = self.lib.Inject(process.pid, wide_dll_path, ct.c_int(timeout))
-							if result != 0:
-								inject_error = DllInjector.InjectError.from_code(result)
-								error_text = inject_error.format(pid=process.pid, dll_path=dll_path, error_code=result)
-								if dll_path.name == 'RabbitWrapper.dll' and len(dll_paths) == 1:
+						# for dll_path in dll_paths:
+						if len(dll_paths) > 0:
+							dll_path = dll_paths[0]
+							if dll_path.name == 'RabbitWrapper.dll':
+								wide_dll_path = wt.LPCWSTR(str(dll_path.resolve()))
+								result = self.lib.Inject(process.pid, wide_dll_path, ct.c_int(timeout))
+								if result != 0:
+									inject_error = DllInjector.InjectError.from_code(result)
+									error_text = inject_error.format(pid=process.pid, dll_path=dll_path, error_code=result)
+									# if dll_path.name == 'RabbitWrapper.dll' and len(dll_paths) == 1:
 									raise ValueError(L('error_dll_injector_failed', """
 										Failed to inject {dll_path}:
 										{error_text}!
 									""").format(dll_path=dll_path, error_text=error_text))
+									# else:
+									# 	raise ValueError(L('error_dll_injector_extra_library_failed', """
+									# 		Failed to inject extra library {dll_path}:
+									# 		{error_text}!
+									# 		Please check Advanced Settings → Inject Libraries.
+									# 	""").format(dll_path=dll_path, error_text=error_text))
 								else:
-									raise ValueError(L('error_dll_injector_extra_library_failed', """
-										Failed to inject extra library {dll_path}:
-										{error_text}!
-										Please check Advanced Settings → Inject Libraries.
-									""").format(dll_path=dll_path, error_text=error_text))
-							else:
-								log.debug(f'Successfully injected DLL to process {process.name()} (PID: {process.pid}): {dll_path}')
+									log.debug(f'Successfully injected DLL to process {process.name()} (PID: {process.pid}): {dll_path}')
+									break
 						return process.pid
 				except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
 					pass

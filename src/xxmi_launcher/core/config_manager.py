@@ -152,13 +152,13 @@ class AppConfig:
 		# --- 3. Write DLL list to wrapper config with header ---
 		try:
 			with open(wrapper_ini, "w", encoding="utf-8") as f:
-				f.write("[Chainload]\r\n")
+				f.write("[Chainload]\n")
 				for line in extra_libs.splitlines():
 					line = line.strip()
 					if line:
 						# Write raw filenames only
 						dll_name = os.path.basename(line)
-						f.write(dll_name + "\r\n")
+						f.write(dll_name + "\n")
 		except Exception as e:
 			log.error(f"Failed to write wrapper config: {wrapper_ini}: {e}")
 
