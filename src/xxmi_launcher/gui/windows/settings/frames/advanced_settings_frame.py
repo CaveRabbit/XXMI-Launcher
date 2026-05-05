@@ -54,26 +54,26 @@ class UnsafeModeFrame(UIFrame):
 		self.put(UnsafeModeCheckbox(self)).grid(row=0, column=0, padx=(0, 0), pady=(0, 0), sticky='ew')
 
 
-class SecurityLabel(UILabel):
-	def __init__(self, master):
-		super().__init__(
-			text=L('advanced_settings_security_label', 'Security:'),
-			font=('Microsoft YaHei', 14, 'bold'),
-			fg_color='transparent',
-			master=master)
+# class SecurityLabel(UILabel):
+# 	def __init__(self, master):
+# 		super().__init__(
+# 			text=L('advanced_settings_security_label', 'Security:'),
+# 			font=('Microsoft YaHei', 14, 'bold'),
+# 			fg_color='transparent',
+# 			master=master)
 
 
-class UnsafeModeCheckbox(UICheckbox):
-	def __init__(self, master):
-		super().__init__(
-			text=L('advanced_settings_unsafe_mode_checkbox', 'Unsafe Mode'),
-			variable=Vars.Active.Migoto.unsafe_mode,
-			master=master)
-		self.set_tooltip(L('advanced_settings_unsafe_mode_checkbox_tooltip', """
-			Enabled: Allow 3-rd party 3dmigoto dlls.
-			Disabled: Disallow 3-rd party 3dmigoto dlls.
-			Note: If 3-rd party d3d11.dll does not support running from nested directories, it will fail to load.
-		"""))
+# class UnsafeModeCheckbox(UICheckbox):
+# 	def __init__(self, master):
+# 		super().__init__(
+# 			text=L('advanced_settings_unsafe_mode_checkbox', 'Unsafe Mode'),
+# 			variable=Vars.Active.Migoto.unsafe_mode,
+# 			master=master)
+# 		self.set_tooltip(L('advanced_settings_unsafe_mode_checkbox_tooltip', """
+# 			Enabled: Allow 3-rd party 3dmigoto dlls.
+# 			Disabled: Disallow 3-rd party 3dmigoto dlls.
+# 			Note: If 3-rd party d3d11.dll does not support running from nested directories, it will fail to load.
+# 		"""))
 
 class RunPreLaunchCheckbox(UICheckbox):
 	def __init__(self, master):
