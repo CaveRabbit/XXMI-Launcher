@@ -151,17 +151,21 @@ class AppConfig:
 
 		# --- 3. Determine correct ChainloadOrder.ini path ---
 		wrapper_ini = Config.Active.Importer.importer_path / "ChainloadOrder.ini"
+		enabled = Config.Active.Importer.extra_libraries_enabled
 
 		# --- 4. Write DLL list to wrapper config with header ---
 		try:
 			with open(wrapper_ini, "w", encoding="utf-8") as f:
-				f.write("[Chainload]\n")
-				for line in extra_libs.splitlines():
-					line = line.strip()
-					if line:
-						# Write raw filenames only
-						dll_name = os.path.basename(line)
-						f.write(dll_name + "\n")
+				f.write("[Chainload]")
+				if enabled:
+					for line in extra_libs.splitlines():
+						line = line.strip()
+						if line:
+							# Write raw filenames only
+							dll_name = os.path.basename(line)
+							f.write("\n" + dll_name)
+				else:
+					f.write("\nd3d11.dll")
 		except Exception as e:
 			log.error(f"Failed to write wrapper config: {wrapper_ini}: {e}")
 
