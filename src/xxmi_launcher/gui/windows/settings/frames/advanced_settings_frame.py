@@ -308,7 +308,10 @@ class InjectLibrariesTextbox(UITextbox):
 		self.trace_write(Vars.Active.Importer.extra_libraries_enabled, self.handle_write_extra_libraries_enabled)
 
 	def handle_write_extra_libraries_enabled(self, var, val):
-		self.configure(state='normal')
+		if val:
+			self.configure(state='normal')
+		else:
+			self.configure(state='disabled')
 
 	def get(self, index1, index2=None):
 		return super().get(index1, index2).strip()
